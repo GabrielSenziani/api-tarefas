@@ -31,6 +31,12 @@ app.get('/tarefas/', (req, res) => { //listar tarefas
     res.json(tarefas);
 });
 
+app.get('/tarefas/concluidas', (req, res) => {
+    const tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida === true);
+    
+    res.json(tarefasConcluidas);
+})
+
 app.delete('/tarefas/:id', (req, res) => { //deletando tarefa
     const id = Number(req.params.id);
 
