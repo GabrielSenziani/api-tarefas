@@ -23,20 +23,29 @@ function gerarDataAleatoria(d1, d2) {
     return `${ano}-${mes}-${dia}`;
 }
 
+function gerarTempoEstimado(min, max) {
+    const tempoAleatorio = Math.floor(Math.random() * (max - min) + min);
+    return tempoAleatorio
+}
+
 
 
 app.post('/tarefas', (req, res) => { //criando rota de adicionar tarefa
     const { nome } = req.body;
 
     const hoje = new Date();
-
+    
     const dataFim = new Date();
     dataFim.setDate(hoje.getDate() + 30)
+
+    const min = 30
+    const max = 180
 
     const novaTarefa = {
         id: Date.now(),
         nome: nome,
         concluida: false,
+        tempoEstimado: gerarTempoEstimado(min, max),
         dataConclusao: gerarDataAleatoria(hoje, dataFim)
     };
 
