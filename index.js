@@ -11,9 +11,9 @@ app.listen(3001, () => {
 
 let tarefas = JSON.parse(fs.readFileSync('tarefas.json'));
 
-function gerarDataAleatoria(dataInicio, dataFim) {
-    const inicio = dataInicio.getTime();
-    const fim = dataFim.getTime();
+function gerarDataAleatoria(d1, d2) {
+    const inicio = d1.getTime();
+    const fim = d2.getTime();
 
     const dataAleatoria = new Date(inicio + Math.random() * (fim - inicio));
     const ano = dataAleatoria.getFullYear();
@@ -23,14 +23,21 @@ function gerarDataAleatoria(dataInicio, dataFim) {
     return `${ano}-${mes}-${dia}`;
 }
 
+
+
 app.post('/tarefas', (req, res) => { //criando rota de adicionar tarefa
     const { nome } = req.body;
+
+    const hoje = new Date();
+
+    const dataFim = new Date();
+    dataFim.setDate(hoje.getDate() + 30)
 
     const novaTarefa = {
         id: Date.now(),
         nome: nome,
         concluida: false,
-        dataConclusao: gerarDataAleatoria(dataInicio, dataFim)
+        dataConclusao: gerarDataAleatoria(hoje, dataFim)
     };
 
     tarefas.push(novaTarefa);
