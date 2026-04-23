@@ -32,6 +32,10 @@ function gerarTempoEstimado(min, max) {
 
 app.post('/tarefas', (req, res) => { //criando rota de adicionar tarefa
     const { nome } = req.body;
+    
+    if (!nome || typeof nome !== 'string' || nome.trim() === '') {
+    return res.status(400).json({ erro: 'Nome inválido' });
+}
 
     const hoje = new Date();
     
