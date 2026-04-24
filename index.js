@@ -80,6 +80,18 @@ app.get('/tarefas/atrasadas', (req, res) => {
     res.json(tarefasAtrasadas);
 })
 
+app.get('/tarefas/tempo-total', (req, res) => {
+    const tarefasPendentes = tarefas.filter(tarefa => tarefa.concluida === false);
+
+    const tempoTotal = tarefasPendentes.reduce((soma, tarefa) => {
+        return soma + tarefa.tempoEstimado;
+    }, 0);
+
+    const quantidade = tarefasPendentes.length;
+
+    res.json({ tempoTotal, quantidade});
+})
+
 app.delete('/tarefas/:id', (req, res) => { //deletando tarefa
     const id = Number(req.params.id);
 
