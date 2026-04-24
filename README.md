@@ -9,6 +9,7 @@ API REST simples para gerenciamento de tarefas.
 - Deletar tarefas
 - Gerar data de conclusão automaticamente
 - Filtrar tarefas atrasadas
+- Calcular o tempo total e a quantidade de tarefas pendentes.
 
 ## Tecnologias
 - Node.js
